@@ -1,26 +1,488 @@
 @import "tailwindcss";
 
+@theme {
+  --font-serif: var(--font-newsreader), Newsreader, Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  --font-sans: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* Surfaces aligned with Phyto-Cellular Laboratory Editorial tokens */
+  --color-surface: #001711;
+  --color-surface-dim: #00110c;
+  --color-surface-container-lowest: #00110c;
+  --color-surface-low: #002018;
+  --color-surface-container: #00251c;
+  --color-surface-high: #073026;
+  --color-surface-highest: #143b30;
+  --color-surface-bright: #194035;
+  --color-surface-variant: #143b30;
+
+  --color-on-surface: #c2ebdc;
+  --color-on-surface-variant: #bbcabf;
+  --color-outline: #86948a;
+  --color-outline-variant: #3c4a42;
+
+  /* Cellular Bioluminescence Emerald */
+  --color-bio-50: #ecfdf5;
+  --color-bio-100: #d1fae5;
+  --color-bio-200: #a7f3d0;
+  --color-bio-300: #6ee7b7;
+  --color-bio-400: #34d399;
+  --color-bio-500: #10b981;
+  --color-bio-600: #059669;
+  --color-bio-700: #047857;
+  --color-bio-800: #065f46;
+  --color-bio-900: #064e3b;
+  --color-bio-950: #022c22;
+
+  --color-primary: #4edea3;
+  --color-primary-fixed: #6ffbbe;
+  --color-primary-container: #10b981;
+  --color-primary-dark: #005236;
+
+  /* Polyphenol Amber Palette */
+  --color-secondary: #ffb95f;
+  --color-secondary-container: #ee9800;
+  --color-amber-extract: #fbbf24;
+  --color-amber-tincture: #f59e0b;
+  --color-amber-resinous: #b45309;
+
+  /* Canopy Dew & Plant Tissue */
+  --color-tertiary: #95d3ba;
+  --color-tertiary-container: #71af97;
+  --color-leaf: #c2ebdc;
+  --color-dew: #95d3ba;
+
+  /* Cytotoxic / Stress Warning */
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #00110c;
+  --foreground: #c2ebdc;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #00110c;
+  color: #c2ebdc;
+  font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Atmospheric Living Botanical Fixed Environment Layers */
+.living-bio-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('/images/botanical-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.38;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.living-bio-tint {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(0, 32, 24, 0.45) 0%, rgba(0, 23, 17, 0.85) 60%, #00110c 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.living-bio-glow-pulse {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 45% 25%, rgba(16, 185, 129, 0.16) 0%, rgba(78, 222, 163, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: bioAuraPulse 9s ease-in-out infinite alternate;
+}
+
+@keyframes bioAuraPulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.45;
+    transform: scale(1.02);
+  }
+}
+
+/* Glassmorphic Specimen Chamber & Petri Tier Styling */
+.chamber-capsule {
+  background: rgba(0, 32, 24, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(78, 222, 163, 0.22);
+  box-shadow: 0 0 45px rgba(16, 185, 129, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+.chlorophyll-glass {
+  background: rgba(0, 32, 24, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(78, 222, 163, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 18, 13, 0.37);
+}
+
+.chlorophyll-glass-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chlorophyll-glass-hover:hover {
+  background: rgba(7, 48, 38, 0.88);
+  border-color: rgba(78, 222, 163, 0.48);
+  box-shadow: 0 12px 38px -8px rgba(16, 185, 129, 0.36);
+  transform: translateY(-2px);
+}
+
+.chamber-card {
+  background: rgba(0, 26, 20, 0.76);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(78, 222, 163, 0.18);
+  transition: all 0.25s ease;
+}
+
+.chamber-card:hover {
+  border-color: rgba(78, 222, 163, 0.42);
+  box-shadow: 0 0 22px rgba(16, 185, 129, 0.18);
+}
+
+/* Bio Buttons & Interactive Triggers from DESIGN.md */
+.bio-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #10b981;
+  color: #022c22;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  transition: all 0.25s ease-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.bio-btn-primary:hover {
+  background-color: #34d399;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.45);
+  transform: translateY(-1px);
+}
+
+.bio-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #f59e0b;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #f59e0b;
+  transition: all 0.25s ease-out;
+  cursor: pointer;
+}
+
+.bio-btn-secondary:hover {
+  background-color: rgba(245, 158, 11, 0.14);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Botanical Badges & Chips from DESIGN.md */
+.botanical-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(6, 78, 59, 0.45);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: #c2ebdc;
+}
+
+.bio-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.bio-indicator-dot.emerald {
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.bio-indicator-dot.amber {
+  background-color: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+/* Form Inputs from DESIGN.md */
+.bio-input-field {
+  background-color: #021f18;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  color: #c2ebdc;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.bio-input-field::placeholder {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: rgba(240, 253, 244, 0.35);
+  letter-spacing: 0.04em;
+}
+
+.bio-input-field:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 1px #10b981, 0 0 16px rgba(16, 185, 129, 0.25);
+}
+
+/* Bioluminescent halos */
+.bio-glow-emerald {
+  box-shadow: 0 0 24px -4px rgba(16, 185, 129, 0.35);
+}
+
+.bio-glow-amber {
+  box-shadow: 0 0 20px -2px rgba(245, 158, 11, 0.30);
+}
+
+/* Scroll reveal motion classes */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Micro-animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Stagger transition helpers for scroll reveals */
+.stagger-1 { transition-delay: 80ms !important; }
+.stagger-2 { transition-delay: 160ms !important; }
+.stagger-3 { transition-delay: 240ms !important; }
+.stagger-4 { transition-delay: 320ms !important; }
+.stagger-5 { transition-delay: 400ms !important; }
+
+@keyframes bloomPulse {
+  0%, 100% {
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(16, 185, 129, 0.45);
+  }
+}
+
+.animate-bloom-pulse {
+  animation: bloomPulse 4s ease-in-out infinite;
+}
+
+@keyframes capillaryFlow {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-capillary-flow {
+  stroke-dasharray: 200;
+  animation: capillaryFlow 2.4s ease-out forwards;
+}
+
+/* Accessible Skip Link */
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: #10b981;
+  color: #001711;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #00110c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #073026;
+  border-radius: 4px;
+  border: 1px solid rgba(78, 222, 163, 0.18);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #143b30;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .living-bio-glow-pulse,
+  .animate-bloom-pulse,
+  .animate-capillary-flow,
+  .animate-fadeIn,
+  .animate-scaleIn {
+    animation: none !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Print Stylesheet for CV Modal and Academic Monograph Export */
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-family: var(--font-plus-jakarta), Georgia, sans-serif !important;
+    font-size: 11pt !important;
+  }
+
+  .living-bio-bg,
+  .living-bio-tint,
+  .living-bio-glow-pulse,
+  header,
+  footer,
+  #back-to-top,
+  .skip-to-content,
+  nav,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  /* When printing from modal */
+  .chamber-capsule,
+  .chamber-card,
+  .chlorophyll-glass {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border: 1px solid #d1d5db !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  h1, h2, h3, h4, h5 {
+    color: #064e3b !important;
+    page-break-after: avoid;
+  }
+
+  p, li, div {
+    color: #374151 !important;
+  }
+
+  .text-primary,
+  .text-amber-extract,
+  .text-dew,
+  .text-leaf,
+  .text-white {
+    color: #064e3b !important;
+  }
+
+  a {
+    color: #064e3b !important;
+    text-decoration: underline;
+  }
 }
